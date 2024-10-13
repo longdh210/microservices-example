@@ -1,0 +1,37 @@
+version: '3'
+services:
+  product-catalog:
+    image: postgres:15.3
+    container_name: product-catalog-service-db
+    ports:
+      - ${PRODUCT_CATALOG_PORT}:5432
+    environment:
+      POSTGRES_DB: ${PRODUCT_CATALOG_DB}
+      POSTGRES_USER: ${PRODUCT_CATALOG_USER}
+      POSTGRES_PASSWORD: ${PRODUCT_CATALOG_PASSWORD}
+    volumes:
+      - ./postgres-data:/data/product-catalog-db
+
+  order:
+    image: postgres:15.3
+    container_name: order-service-db
+    ports:
+      - ${ORDER_PORT}:5432
+    environment:
+      POSTGRES_DB: ${ORDER_DB}
+      POSTGRES_USER: ${ORDER_USER}
+      POSTGRES_PASSWORD: ${ORDER_PASSWORD}
+    volumes:
+      - ./postgres-data:/data/order-db
+
+  payment:
+    image: postgres:15.3
+    container_name: payment-service-db
+    ports:
+      - ${PAYMENT_PORT}:5432
+    environment:
+      POSTGRES_DB: ${PAYMENT_DB}
+      POSTGRES_USER: ${PAYMENT_USER}
+      POSTGRES_PASSWORD: ${PAYMENT_PASSWORD}
+    volumes:
+      - ./postgres-data:/data/payment-db
