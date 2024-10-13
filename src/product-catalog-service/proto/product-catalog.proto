@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package productcatalog;
+
+service ProductCatalogService {
+  rpc AddProduct(AddProductRequest) returns (Empty) {};
+  rpc UpdateProduct(UpdateProductRequest) returns (Empty) {};
+  rpc ListProducts(Empty) returns (ListProductsResponse) {};
+  rpc GetProduct(GetProductRequest) returns (Product) {};
+  rpc DeleteProduct(GetProductRequest) returns (Empty) {};
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string picture = 4;
+  int32 price = 5;
+  repeated string categories = 6;
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message AddProductRequest {
+  string name = 2;
+  string description = 3;
+  string picture = 4;
+  int32 price = 5;
+  repeated string categories = 6;
+}
+
+message UpdateProductRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string picture = 4;
+  int32 price = 5;
+  repeated string categories = 6;
+}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+message Empty {}

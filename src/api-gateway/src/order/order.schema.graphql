@@ -1,0 +1,26 @@
+type Order {
+  id: ID!
+  customerId: String!
+  productIds: [String]!
+  prices: [Int]!
+}
+
+type Query {
+  orders: [Order]!
+  order(id: String!): Order
+}
+
+input CreateOrderInput {
+  customerId: String!
+  productIds: [String]!
+  prices: [Int]!
+}
+
+type Message {
+  id: String!
+}
+
+type Mutation {
+  addOrder(createOrderInput: CreateOrderInput): Order!
+  deleteOrder(id: String!): Message
+}
