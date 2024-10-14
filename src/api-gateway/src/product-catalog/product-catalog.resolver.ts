@@ -7,19 +7,21 @@ export class ProductCatalogResolver {
 
   @Mutation('addProduct')
   async addProduct(
-    @Args('name') name: string,
-    @Args('description') description: string,
-    @Args('picture') picture: string,
-    @Args('price') price: number,
-    @Args('categories') categories: string[],
+    // @Args('name') name: string,
+    // @Args('description') description: string,
+    // @Args('picture') picture: string,
+    // @Args('price') price: number,
+    // @Args('categories') categories: string[],
+    @Args('createProductInput') createProductInput: any,
   ) {
-    return await this.productCatalogService.addProduct({
-      name,
-      description,
-      picture,
-      price,
-      categories,
+    const data = await this.productCatalogService.addProduct({
+      name: createProductInput.name,
+      description: createProductInput.description,
+      picture: createProductInput.picture,
+      price: createProductInput.price,
+      categories: createProductInput.categories,
     });
+    return data;
   }
 
   @Mutation('updateProduct')

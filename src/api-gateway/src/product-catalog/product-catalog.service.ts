@@ -42,9 +42,10 @@ export class ProductCatalogService implements OnModuleInit {
   }
 
   async addProduct(addProductDto: AddProductDto) {
-    return await lastValueFrom(
+    const newProduct = await lastValueFrom(
       this.productCatalogService.addProduct(addProductDto),
     );
+    return newProduct;
   }
 
   async updateProduct(updateProductDto: UpdateProductDto) {

@@ -1,0 +1,12 @@
+{
+  "name": "microservices-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd ./src/api-gateway && npm run start:dev & cd ./src/product-catalog-service && npm run start:dev & cd ./src/order-service && npm run start:dev & cd ./src/payment-service && npm run start:dev"
+  },
+  "author": "",
+  "license": "ISC"
+}

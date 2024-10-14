@@ -16,7 +16,7 @@ export class AppService {
     const newProduct = this.productCatalogRepository.create({
       ...addProductDto,
     });
-    await this.productCatalogRepository.save(newProduct);
+    return await this.productCatalogRepository.save(newProduct);
   }
 
   async updateProductById(updateProductDto: UpdateProductDto) {
