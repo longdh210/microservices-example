@@ -20,7 +20,7 @@ interface IProductCatalogService {
     price,
     categories,
   }: UpdateProductDto): Observable<any>;
-  listProduct(): Observable<any>;
+  listProduct({}): Observable<any>;
   getProduct({ id }): Observable<any>;
   deleteProduct({ id }): Observable<any>;
 }
@@ -56,7 +56,7 @@ export class ProductCatalogService implements OnModuleInit {
 
   async listProduct() {
     const listProduct = await lastValueFrom(
-      this.productCatalogService.listProduct(),
+      this.productCatalogService.listProduct(null),
     );
     return listProduct.products;
   }

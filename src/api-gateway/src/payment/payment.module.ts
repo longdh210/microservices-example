@@ -11,7 +11,7 @@ import { join } from 'path';
         name: 'PAYMENT_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:3003',
+          url: 'payment-service:5003',
           package: 'payment',
           protoPath: join(__dirname, '../../proto/payment.proto'),
         },

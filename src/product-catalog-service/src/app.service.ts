@@ -34,14 +34,17 @@ export class AppService {
       }
     }
 
-    await this.productCatalogRepository.save(product);
+    return await this.productCatalogRepository.save(product);
   }
 
   async listProducts() {
-    const data = await this.productCatalogRepository.find({
+    const products = await this.productCatalogRepository.find({
       where: { softDelete: false },
     });
-    return { products: data };
+    if (products.length == 0) {
+      return [];
+    }
+    return { products };
   }
 
   async getProductById(id: string) {
@@ -55,6 +58,6 @@ export class AppService {
       where: { id },
     });
     product.softDelete = true;
-    await this.productCatalogRepository.save(product);
+    return await this.productCatalogRepository.save(product);
   }
 }

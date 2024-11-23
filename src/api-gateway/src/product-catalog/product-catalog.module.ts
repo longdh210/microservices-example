@@ -11,7 +11,7 @@ import { join } from 'path';
         name: 'PRODUCT_CATALOG_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:3001',
+          url: 'product-catalog-service:5001',
           package: 'productcatalog',
           protoPath: join(__dirname, '../../proto/product-catalog.proto'),
         },

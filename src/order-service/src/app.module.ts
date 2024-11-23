@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrderEntity } from './entities/order-service.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { join } from 'path';
         name: 'PRODUCT_CATALOG_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:3001',
+          url: '0.0.0.0:5001',
           package: 'productcatalog',
           protoPath: join(__dirname, '../proto/product-catalog.proto'),
         },
@@ -41,14 +42,14 @@ import { join } from 'path';
         name: 'PAYMENT_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:3003',
-          package: 'payment',
-          protoPath: join(__dirname, '../proto/payment.proto'),
+          url: '0.0.0.0:5003',
+          package: ['payment'],
+          protoPath: [join(__dirname, '../proto/payment.proto')],
         },
       },
     ]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -14,7 +14,7 @@ export class AppService {
 
   async addPayment(addPaymentDto: AddPaymentDto) {
     const newPayment = this.paymentRepository.create(addPaymentDto);
-    await this.paymentRepository.save(newPayment);
+    return await this.paymentRepository.save(newPayment);
   }
 
   async updatePayment(updatePaymentDto: UpdatePaymentDto) {
@@ -29,6 +29,9 @@ export class AppService {
     const payments = await this.paymentRepository.find({
       where: { softDelete: false },
     });
+    if (payments.length == 0) {
+      return [];
+    }
     return { payments };
   }
 

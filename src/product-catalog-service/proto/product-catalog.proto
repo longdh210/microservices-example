@@ -5,7 +5,7 @@ package productcatalog;
 service ProductCatalogService {
   rpc AddProduct(AddProductRequest) returns (Product) {};
   rpc UpdateProduct(UpdateProductRequest) returns (Product) {};
-  rpc ListProducts(Empty) returns (ListProductsResponse) {};
+  rpc ListProduct(Empty) returns (ListProductsResponse) {};
   rpc GetProduct(GetProductRequest) returns (Product) {};
   rpc DeleteProduct(GetProductRequest) returns (DeleteProductResponse) {};
 }

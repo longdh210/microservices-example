@@ -5,7 +5,7 @@ import { ClientGrpc } from '@nestjs/microservices';
 
 interface IPaymentService {
   addPayment({ orderId, status, paymentMethod }): Observable<any>;
-  listPayment(): Observable<any>;
+  listPayment({}): Observable<any>;
   getPayment({ id }): Observable<any>;
   deletePayment({ id }): Observable<any>;
 }
@@ -28,7 +28,11 @@ export class PaymentService implements OnModuleInit {
   }
 
   async listPayment() {
-    const listPayment = await lastValueFrom(this.paymentService.listPayment());
+    console.log('list payment');
+    const listPayment = await lastValueFrom(
+      this.paymentService.listPayment(null),
+    );
+    console.log('listPayment:', listPayment);
     return listPayment.payments;
   }
 

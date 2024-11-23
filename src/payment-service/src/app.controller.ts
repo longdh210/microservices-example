@@ -12,7 +12,7 @@ export class AppController {
     return await this.appService.addPayment(addPaymentDto);
   }
 
-  @GrpcMethod('PaymentService', 'ListPayments')
+  @GrpcMethod('PaymentService', 'ListPayment')
   async listPayments() {
     return await this.appService.listPayments();
   }

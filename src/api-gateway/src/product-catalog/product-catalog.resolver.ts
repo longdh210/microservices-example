@@ -15,11 +15,7 @@ export class ProductCatalogResolver {
     @Args('createProductInput') createProductInput: any,
   ) {
     const data = await this.productCatalogService.addProduct({
-      name: createProductInput.name,
-      description: createProductInput.description,
-      picture: createProductInput.picture,
-      price: createProductInput.price,
-      categories: createProductInput.categories,
+      ...createProductInput,
     });
     return data;
   }

@@ -18,8 +18,9 @@ export class AppController {
     return await this.appService.updateProductById(updateProductDto);
   }
 
-  @GrpcMethod('ProductCatalogService', 'ListProducts')
+  @GrpcMethod('ProductCatalogService', 'ListProduct')
   async listProducts() {
+    // TODO: handle error when list empty
     return await this.appService.listProducts();
   }
 

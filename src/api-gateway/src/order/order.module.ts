@@ -11,7 +11,7 @@ import { join } from 'path';
         name: 'ORDER_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:3002',
+          url: 'order-service:5002',
           package: 'order',
           protoPath: join(__dirname, '../../proto/order.proto'),
         },

@@ -4,7 +4,7 @@ package payment;
 
 service PaymentService {
   rpc AddPayment(AddPaymentRequest) returns (Payment) {};
-  rpc ListPayments(Empty) returns (ListPaymentsResponse) {};
+  rpc ListPayment(Empty) returns (ListPaymentsResponse) {};
   rpc GetPayment(GetPaymentRequest) returns (Payment) {};
   rpc DeletePayment(GetPaymentRequest) returns (DeletePaymentResponse) {};
 }

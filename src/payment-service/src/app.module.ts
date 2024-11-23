@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PaymentEntity } from './entities/payment.entity';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { PaymentEntity } from './entities/payment.entity';
     }),
     TypeOrmModule.forFeature([PaymentEntity]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}

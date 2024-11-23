@@ -5,7 +5,7 @@ import { AddOrderDto } from 'src/dto/add-order.dto';
 
 interface IOrderService {
   addOrder({ customerId, productIds, prices }): Observable<any>;
-  listOrders(): Observable<any>;
+  listOrders({}): Observable<any>;
   getOrder({ id }): Observable<any>;
   deleteOrder({ id }): Observable<any>;
 }
@@ -28,7 +28,7 @@ export class OrderService implements OnModuleInit {
   }
 
   async listOrder() {
-    const listOrder = await lastValueFrom(this.orderService.listOrders());
+    const listOrder = await lastValueFrom(this.orderService.listOrders(null));
     return listOrder.orders;
   }
 

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalog-service
+spec:
+  selector:
+    matchLabels:
+      app: product-catalog-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-catalog-service
+    spec:
+      containers:
+        - name: product-catalog-service
+          image: longdh16/product-catalog-service
+          ports:
+            - containerPort: 4001
+              name: 'http'
+            - containerPort: 5001
+              name: 'grpc'
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: '1'

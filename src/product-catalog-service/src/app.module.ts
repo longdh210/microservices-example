@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductCatalogEntity } from './entities/product-catalog.entity';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { ProductCatalogEntity } from './entities/product-catalog.entity';
     }),
     TypeOrmModule.forFeature([ProductCatalogEntity]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}

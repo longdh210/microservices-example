@@ -1,21 +1,14 @@
 import { NestFactory } from '@nestjs/core';
+import { GrpcOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { join } from 'path';
+
+import { appGrpMicroservice } from './app.grpc';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
-      transport: Transport.GRPC,
-      options: {
-        url: '0.0.0.0:3002',
-        package: 'order',
-        protoPath: join(__dirname, '../proto/order.proto'),
-      },
-    },
-  );
+  const app = await NestFactory.create(AppModule);
+  app.connectMicroservice<GrpcOptions>(appGrpMicroservice);
 
-  await app.listen();
+  await app.startAllMicroservices();
+  await app.listen(4002);
 }
 bootstrap();
