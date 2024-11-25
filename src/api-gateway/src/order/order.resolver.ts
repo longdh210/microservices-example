@@ -1,17 +1,14 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { OrderService } from './order.service';
+import { AddOrderDto } from 'src/dto/add-order.dto';
 
 @Resolver('Order')
 export class OrderResolver {
   constructor(private readonly orderService: OrderService) {}
 
   @Mutation('addOrder')
-  async addOrder(
-    @Args('customerId') customerId: string,
-    @Args('productIds') productIds: string[],
-    @Args('prices') prices: number[],
-  ) {
-    return await this.orderService.addOrder({ customerId, productIds, prices });
+  async addOrder(@Args('createOrderInput') createOrderInput: AddOrderDto) {
+    return await this.orderService.addOrder({ ...createOrderInput });
   }
 
   @Query('orders')
