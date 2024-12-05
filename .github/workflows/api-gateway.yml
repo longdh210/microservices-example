@@ -1,0 +1,50 @@
+name: api-gateway-ci-cd
+
+on:
+  push:
+    paths:
+      - 'Dockerfile'
+      - 'src/api-gateway'
+      - 'k8s/api-gateway/**'
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: unbuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Docker Login
+        uses: docker/login-action@v2.2.0
+        with:
+          username: ${{secrets.DOCKER_HUB_USER}}
+          password: ${{secrets.DOCKER_HUB_PWD}}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4.1.1
+        with:
+          context: ./src/api-gateway
+          file: Dockerfile
+          push: true
+          tags: |
+            ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
+            ${{secrets.DOCKER_HUB_USER}}/api-gateway:v${{github.run_number}}
+  cd:
+    runs-on: ubuntu-22.04
+    needs: [ci]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Kubernetes Set Context
+        uses: Azure/k8s-set-context@v3.0
+        with:
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_CONFIG}}
+
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          images: ${{secrets.DOCKER_HUB_USER}}/api-gateway:v${{github.run_number}}
+          manifests: |
+            k8s/api-gateway/deployment.yaml
+            k8s/api-gateway/service.yaml

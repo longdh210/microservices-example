@@ -15,6 +15,7 @@ spec:
       containers:
         - name: payment-service
           image: longdh16/payment-service
+          imagePullPolicy: Always
           ports:
             - containerPort: 4003
               name: 'http'
@@ -22,5 +23,5 @@ spec:
               name: 'grpc'
           resources:
             limits:
-              memory: 512Mi
-              cpu: '1'
+              memory: 100Mi
+              cpu: 50m

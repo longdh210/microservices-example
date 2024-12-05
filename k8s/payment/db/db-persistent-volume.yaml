@@ -1,17 +1,17 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: payment-volume
-  labels:
-    type: local
-spec:
-  claimRef:
-    namespace: default
-    name: payment-volume-claim
-  storageClassName: manual
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: '/data/payment'
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: payment-volume
+#   labels:
+#     type: local
+# spec:
+#   claimRef:
+#     namespace: default
+#     name: payment-volume-claim
+#   storageClassName: manual
+#   capacity:
+#     storage: 256Mi
+#   accessModes:
+#     - ReadWriteMany
+#   hostPath:
+#     path: '/data/payment'

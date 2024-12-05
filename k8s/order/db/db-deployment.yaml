@@ -18,9 +18,9 @@ spec:
           ports:
             - containerPort: 5433
               name: 'postgres'
-          volumeMounts:
-            - mountPath: '/var/lib/postgresql/data'
-              name: order-data-storage
+          # volumeMounts:
+          #   - mountPath: '/var/lib/postgresql/data'
+          #     name: order-data-storage
           env:
             - name: POSTGRES_DB
               value: order
@@ -30,9 +30,9 @@ spec:
               value: password
           resources:
             limits:
-              memory: 256Mi
-              cpu: '1'
-      volumes:
-        - name: order-data-storage
-          persistentVolumeClaim:
-            claimName: order-volume-claim
+              memory: 100Mi
+              cpu: 50m
+      # volumes:
+      #   - name: order-data-storage
+      #     persistentVolumeClaim:
+      #       claimName: order-volume-claim

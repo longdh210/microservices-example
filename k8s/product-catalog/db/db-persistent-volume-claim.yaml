@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: product-catalog-volume-claim
-spec:
-  volumeName: product-catalog-volume
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 256Mi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: product-catalog-volume-claim
+# spec:
+#   volumeName: product-catalog-volume
+#   storageClassName: manual
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 256Mi

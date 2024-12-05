@@ -11,7 +11,7 @@ import { join } from 'path';
         name: 'PAYMENT_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: 'payment-service:5003',
+          url: `${process.env.PAYMENT_SERVICE_HOST}:5003`,
           package: 'payment',
           protoPath: join(__dirname, '../../proto/payment.proto'),
         },

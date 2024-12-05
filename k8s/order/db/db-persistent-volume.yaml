@@ -1,18 +1,17 @@
-# db-persistent-volume.yaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: order-volume
-  labels:
-    type: local
-spec:
-  claimRef:
-    namespace: default
-    name: order-volume-claim
-  storageClassName: manual
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: '/data/order'
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: order-volume
+#   labels:
+#     type: local
+# spec:
+#   claimRef:
+#     namespace: default
+#     name: order-volume-claim
+#   storageClassName: manual
+#   capacity:
+#     storage: 256Mi
+#   accessModes:
+#     - ReadWriteMany
+#   hostPath:
+#     path: '/data/order'
