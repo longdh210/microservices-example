@@ -45,6 +45,7 @@ jobs:
         with:
           cluster_name: ${{secrets.CLUSTER_NAME}}
           project_id: ${{secrets.PROJECT_ID}}
+          location: ${{secrets.LOCATION}}
 
       - name: 'Deploy to GKE'
         run: |
