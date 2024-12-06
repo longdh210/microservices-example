@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'Dockerfile'
-      - 'src/api-gateway'
+      - 'src/api-gateway/**'
       - 'k8s/api-gateway/**'
   workflow_dispatch:
 
@@ -28,22 +28,24 @@ jobs:
           push: true
           tags: |
             ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
-  # cd:
-  #   runs-on: ubuntu-22.04
-  #   needs: [ci]
-  #   steps:
-  #     - uses: actions/checkout@v3
+  cd:
+    runs-on: ubuntu-22.04
+    needs: [ci]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: ${{secrets.WORKLOAD_IDENTITY_PROVIDER}}
 
-  #     - name: Kubernetes Set Context
-  #       uses: Azure/k8s-set-context@v3.0
-  #       with:
-  #         method: kubeconfig
-  #         kubeconfig: ${{secrets.K8S_CONFIG}}
+      - name: 'Get GKE Credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: ${{secrets.WORKLOAD_IDENTITY_PROVIDER}}
+          project_id: ${{secrets.PROJECT_ID}}
 
-  #     - name: Deploy to Kubernetes cluster
-  #       uses: Azure/k8s-deploy@v4.9
-  #       with:
-  #         images: ${{secrets.DOCKER_HUB_USER}}/api-gateway:v${{github.run_number}}
-  #         manifests: |
-  #           k8s/api-gateway/deployment.yaml
-  #           k8s/api-gateway/service.yaml
+      - name: 'Deploy to GKE'
+        run: |
+          kubectl apply -f ./k8s/api-gateway
