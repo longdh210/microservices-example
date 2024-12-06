@@ -23,7 +23,7 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v4.1.1
         with:
-          context: ./src/api-gateway
+          context: src/api-gateway/Dockerfile
           file: Dockerfile
           push: true
           tags: |
