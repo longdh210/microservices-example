@@ -43,7 +43,7 @@ jobs:
       - name: 'Get GKE Credentials'
         uses: 'google-github-actions/get-gke-credentials@v1'
         with:
-          cluster_name: ${{secrets.WORKLOAD_IDENTITY_PROVIDER}}
+          cluster_name: ${{secrets.CLUSTER_NAME}}
           project_id: ${{secrets.PROJECT_ID}}
 
       - name: 'Deploy to GKE'
