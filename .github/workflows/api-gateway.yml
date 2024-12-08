@@ -27,12 +27,12 @@ jobs:
       #     file: ./src/api-gateway/Dockerfile
       #     push: true
       #     tags: |
-      #       ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
+      #       ${{secrets.DOCKER_HUB_USER}}/api-gateway:${{github.run_number}}
       - name: Build Docker image without cache
         run: |
-          docker build --no-cache -t ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest ./src/api-gateway/
+          docker build --no-cache -t ${{secrets.DOCKER_HUB_USER}}/api-gateway:${{github.run_number}} ./src/api-gateway/
       - name: Push Docker image
-        run: docker push ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
+        run: docker push ${{secrets.DOCKER_HUB_USER}}/api-gateway:${{github.run_number}}
   cd:
     runs-on: ubuntu-22.04
     needs: [ci]

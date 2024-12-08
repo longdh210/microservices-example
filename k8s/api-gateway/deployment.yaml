@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: longdh16/api-gateway
+          image: longdh16/api-gateway:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 4000
