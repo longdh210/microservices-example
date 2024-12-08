@@ -20,14 +20,19 @@ jobs:
           username: ${{secrets.DOCKER_HUB_USER}}
           password: ${{secrets.DOCKER_HUB_PWD}}
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v4.1.1
-        with:
-          context: ./src/api-gateway
-          file: ./src/api-gateway/Dockerfile
-          push: true
-          tags: |
-            ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
+      # - name: Build and push Docker images
+      #   uses: docker/build-push-action@v4.1.1
+      #   with:
+      #     context: ./src/api-gateway
+      #     file: ./src/api-gateway/Dockerfile
+      #     push: true
+      #     tags: |
+      #       ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
+      - name: Build Docker image without cache
+        run: |
+          docker build --no-cache -t ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest .
+      - name: Push Docker image
+        run: docker push ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
   cd:
     runs-on: ubuntu-22.04
     needs: [ci]
