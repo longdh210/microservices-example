@@ -30,7 +30,7 @@ jobs:
       #       ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
       - name: Build Docker image without cache
         run: |
-          docker build --no-cache -t ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest .
+          docker build --no-cache -t ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest ./src/api-gateway/
       - name: Push Docker image
         run: docker push ${{secrets.DOCKER_HUB_USER}}/api-gateway:latest
   cd:
